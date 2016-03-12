@@ -21,7 +21,7 @@ namespace KinectStreams
     /// </summary>
     public partial class MainWindow : Window
     {
-        Mode _mode = Mode.Color;
+        //Mode _mode = Mode.Color;
 
         KinectSensor _sensor;
         MultiSourceFrameReader _reader;
@@ -34,6 +34,7 @@ namespace KinectStreams
             InitializeComponent();
         }
         
+        //Reads the stream
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
             _sensor = KinectSensor.GetDefault();
@@ -47,6 +48,7 @@ namespace KinectStreams
             }
         }
 
+        //Turns off the stream when GUI is closed
         private void Window_Closed(object sender, EventArgs e)
         {
             if (_reader != null)
@@ -64,44 +66,39 @@ namespace KinectStreams
         {
             var reference = e.FrameReference.AcquireFrame();
 
-            // Color
-            using (var frame = reference.ColorFrameReference.AcquireFrame())
+            var colorFrame = reference.ColorFrameReference.AcquireFrame();
+            var depthFrame = reference.DepthFrameReference.AcquireFrame();
+            var infraredFrame = reference.InfraredFrameReference.AcquireFrame();
+
+            using (colorFrame)
             {
-                if (frame != null)
+                //Color
+                if (colorFrame != null)
                 {
-                    if (_mode == Mode.Color)
+                        camera1.Source = colorFrame.ToBitmap();
+                }
+
+                //Depth
+                using (depthFrame)
+                {
+                    if (depthFrame != null)
                     {
-                        camera.Source = frame.ToBitmap();
+                        camera2.Source = depthFrame.ToBitmap();
                     }
                 }
-            }
 
-            // Depth
-            using (var frame = reference.DepthFrameReference.AcquireFrame())
-            {
-                if (frame != null)
+                //Infrared
+                using (infraredFrame)
                 {
-                    if (_mode == Mode.Depth)
+                    if (infraredFrame != null)
                     {
-                        camera.Source = frame.ToBitmap();
-                    }
-                }
-            }
-
-            // Infrared
-            using (var frame = reference.InfraredFrameReference.AcquireFrame())
-            {
-                if (frame != null)
-                {
-                    if (_mode == Mode.Infrared)
-                    {
-                        camera.Source = frame.ToBitmap();
+                        camera3.Source = infraredFrame.ToBitmap();
                     }
                 }
             }
         }
 
-        private void Color_Click(object sender, RoutedEventArgs e)
+        /* private void Color_Click(object sender, RoutedEventArgs e)
         {
             _mode = Mode.Color;
         }
@@ -119,13 +116,13 @@ namespace KinectStreams
         private void Body_Click(object sender, RoutedEventArgs e)
         {
             _displayBody = !_displayBody;
-        }
+        } */
     }
 
-    public enum Mode
+    /* public enum Mode
     {
         Color,
         Depth,
         Infrared
-    }
+    } */
 }
