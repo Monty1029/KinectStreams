@@ -21,20 +21,19 @@ namespace KinectStreams
     /// </summary>
     public partial class MainWindow : Window
     {
-        //Mode _mode = Mode.Color;
+        Mode _mode = Mode.Color;
 
         KinectSensor _sensor;
         MultiSourceFrameReader _reader;
         IList<Body> _bodies;
 
         bool _displayBody = false;
-        
+
         public MainWindow()
         {
             InitializeComponent();
         }
-        
-        //Reads the stream
+
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
             _sensor = KinectSensor.GetDefault();
@@ -48,7 +47,6 @@ namespace KinectStreams
             }
         }
 
-        //Turns off the stream when GUI is closed
         private void Window_Closed(object sender, EventArgs e)
         {
             if (_reader != null)
@@ -66,39 +64,80 @@ namespace KinectStreams
         {
             var reference = e.FrameReference.AcquireFrame();
 
-            var colorFrame = reference.ColorFrameReference.AcquireFrame();
-            var depthFrame = reference.DepthFrameReference.AcquireFrame();
-            var infraredFrame = reference.InfraredFrameReference.AcquireFrame();
-
-            using (colorFrame)
+            // Color
+            using (var frame = reference.ColorFrameReference.AcquireFrame())
             {
-                //Color
-                if (colorFrame != null)
+                if (frame != null)
                 {
-                        camera1.Source = colorFrame.ToBitmap();
-                }
-
-                //Depth
-                using (depthFrame)
-                {
-                    if (depthFrame != null)
+                    if (_mode == Mode.Color)
                     {
-                        camera2.Source = depthFrame.ToBitmap();
+                        camera.Source = frame.ToBitmap();
                     }
                 }
+            }
 
-                //Infrared
-                using (infraredFrame)
+            // Depth
+            using (var frame = reference.DepthFrameReference.AcquireFrame())
+            {
+                if (frame != null)
                 {
-                    if (infraredFrame != null)
+                    if (_mode == Mode.Depth)
                     {
-                        camera3.Source = infraredFrame.ToBitmap();
+                        camera.Source = frame.ToBitmap();
+                    }
+                }
+            }
+
+            // Infrared
+            using (var frame = reference.InfraredFrameReference.AcquireFrame())
+            {
+                if (frame != null)
+                {
+                    if (_mode == Mode.Infrared)
+                    {
+                        camera.Source = frame.ToBitmap();
+                    }
+                }
+            }
+
+            // Blue
+            using (var frame = reference.ColorFrameReference.AcquireFrame())
+            {
+                if (frame != null)
+                {
+                    if (_mode == Mode.Blue)
+                    {
+                        camera.Source = frame.ToBitmapBlue();
+                    }
+                }
+            }
+
+            // Green
+            using (var frame = reference.ColorFrameReference.AcquireFrame())
+            {
+                if (frame != null)
+                {
+                    if (_mode == Mode.Green)
+                    {
+                        camera.Source = frame.ToBitmapGreen();
+                    }
+                }
+            }
+
+            // Red
+            using (var frame = reference.ColorFrameReference.AcquireFrame())
+            {
+                if (frame != null)
+                {
+                    if (_mode == Mode.Red)
+                    {
+                        camera.Source = frame.ToBitmapRed();
                     }
                 }
             }
         }
 
-        /* private void Color_Click(object sender, RoutedEventArgs e)
+        private void Color_Click(object sender, RoutedEventArgs e)
         {
             _mode = Mode.Color;
         }
@@ -113,16 +152,34 @@ namespace KinectStreams
             _mode = Mode.Infrared;
         }
 
+        private void Blue_Click(object sender, RoutedEventArgs e)
+        {
+            _mode = Mode.Blue;
+        }
+
+        private void Green_Click(object sender, RoutedEventArgs e)
+        {
+            _mode = Mode.Green;
+        }
+
+        private void Red_Click(object sender, RoutedEventArgs e)
+        {
+            _mode = Mode.Red;
+        }
+
         private void Body_Click(object sender, RoutedEventArgs e)
         {
             _displayBody = !_displayBody;
-        } */
+        }
     }
 
-    /* public enum Mode
+    public enum Mode
     {
         Color,
         Depth,
-        Infrared
-    } */
+        Infrared,
+        Blue,
+        Green,
+        Red
+    }
 }

@@ -35,6 +35,112 @@ namespace KinectStreams
             return BitmapSource.Create(width, height, 96, 96, format, null, pixels, stride);
         }
 
+        //Blue stream
+        public static ImageSource ToBitmapBlue(this ColorFrame frame)
+        {
+
+            int width = frame.FrameDescription.Width;
+            int height = frame.FrameDescription.Height;
+            PixelFormat format = PixelFormats.Bgr32;
+
+            ushort[] pixelData = new ushort[width * height];
+            byte[] pixels = new byte[width * height * ((format.BitsPerPixel + 7) / 8)];
+
+            if (frame.RawColorImageFormat == ColorImageFormat.Bgra)
+            {
+                frame.CopyRawFrameDataToArray(pixels);
+            }
+            else
+            {
+                frame.CopyConvertedFrameDataToArray(pixels, ColorImageFormat.Bgra);
+            }
+
+            int colorIndex = 0;
+
+            for (int i = 0; i < pixelData.Length; i++)
+            {
+                pixels[colorIndex++] *= 255;
+                pixels[colorIndex++] *= 0;
+                pixels[colorIndex++] *= 0;
+
+                colorIndex++;
+            }
+
+            int stride = width * format.BitsPerPixel / 8;
+
+            return BitmapSource.Create(width, height, 96, 96, format, null, pixels, stride);
+        }
+
+        public static ImageSource ToBitmapGreen(this ColorFrame frame)
+        {
+
+            int width = frame.FrameDescription.Width;
+            int height = frame.FrameDescription.Height;
+            PixelFormat format = PixelFormats.Bgr32;
+
+            ushort[] pixelData = new ushort[width * height];
+            byte[] pixels = new byte[width * height * ((format.BitsPerPixel + 7) / 8)];
+
+            if (frame.RawColorImageFormat == ColorImageFormat.Bgra)
+            {
+                frame.CopyRawFrameDataToArray(pixels);
+            }
+            else
+            {
+                frame.CopyConvertedFrameDataToArray(pixels, ColorImageFormat.Bgra);
+            }
+
+            int colorIndex = 0;
+
+            for (int i = 0; i < pixelData.Length; i++)
+            {
+                pixels[colorIndex++] *= 0;
+                pixels[colorIndex++] *= 255;
+                pixels[colorIndex++] *= 0;
+
+                colorIndex++;
+            }
+
+            int stride = width * format.BitsPerPixel / 8;
+
+            return BitmapSource.Create(width, height, 96, 96, format, null, pixels, stride);
+        }
+
+        public static ImageSource ToBitmapRed(this ColorFrame frame)
+        {
+
+            int width = frame.FrameDescription.Width;
+            int height = frame.FrameDescription.Height;
+            PixelFormat format = PixelFormats.Bgr32;
+
+            ushort[] pixelData = new ushort[width * height];
+            byte[] pixels = new byte[width * height * ((format.BitsPerPixel + 7) / 8)];
+
+            if (frame.RawColorImageFormat == ColorImageFormat.Bgra)
+            {
+                frame.CopyRawFrameDataToArray(pixels);
+            }
+            else
+            {
+                frame.CopyConvertedFrameDataToArray(pixels, ColorImageFormat.Bgra);
+            }
+
+            int colorIndex = 0;
+
+            for (int i = 0; i < pixelData.Length; i++)
+            {
+                pixels[colorIndex++] *= 0;
+                pixels[colorIndex++] *= 0;
+                pixels[colorIndex++] *= 255;
+
+                colorIndex++;
+            }
+
+            int stride = width * format.BitsPerPixel / 8;
+
+            return BitmapSource.Create(width, height, 96, 96, format, null, pixels, stride);
+        }
+
         //Depth stream
         public static ImageSource ToBitmap(this DepthFrame frame)
         {
