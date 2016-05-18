@@ -124,6 +124,18 @@ namespace KinectStreams
                 }
             }
 
+            // Greyscale
+            using (var frame = reference.ColorFrameReference.AcquireFrame())
+            {
+                if (frame != null)
+                {
+                    if (_mode == Mode.Greyscale)
+                    {
+                        camera.Source = frame.ToBitmapGreyscale();
+                    }
+                }
+            }
+
             // Red
             using (var frame = reference.ColorFrameReference.AcquireFrame())
             {
@@ -167,6 +179,11 @@ namespace KinectStreams
             _mode = Mode.Red;
         }
 
+        private void Greyscale_Click(object sender, RoutedEventArgs e)
+        {
+            _mode = Mode.Greyscale;
+        }
+
         private void Body_Click(object sender, RoutedEventArgs e)
         {
             _displayBody = !_displayBody;
@@ -180,6 +197,7 @@ namespace KinectStreams
         Infrared,
         Blue,
         Green,
-        Red
+        Red,
+        Greyscale
     }
 }

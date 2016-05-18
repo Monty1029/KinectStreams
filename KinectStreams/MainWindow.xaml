@@ -13,6 +13,7 @@
                 <Button Content="Red Filter" Style="{StaticResource ButtonStyle}" Click="Red_Click" />
                 <Button Content="Green Filter" Style="{StaticResource ButtonStyle}" Click="Green_Click" />
                 <Button Content="Blue Filter" Style="{StaticResource ButtonStyle}" Click="Blue_Click" />
+                <Button Content="Greyscale Filter" Style="{StaticResource ButtonStyle}" Click="Greyscale_Click" />
             </StackPanel>
         </Grid>
     </Grid>
