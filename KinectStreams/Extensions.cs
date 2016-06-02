@@ -1,4 +1,5 @@
 ﻿using Microsoft.Kinect;
+using Microsoft.Kinect.Face;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -54,16 +55,16 @@ namespace KinectStreams
             {
                 frame.CopyConvertedFrameDataToArray(pixels, ColorImageFormat.Bgra);
             }
-
+            
             int colorIndex = 0;
 
             for (int i = 0; i < pixelData.Length; i++)
             {
                 int intensity = (pixels[colorIndex++] + pixels[colorIndex++] + pixels[colorIndex++]) / 3;
                 colorIndex -= 3;
-                pixels[colorIndex++] = (byte) intensity;
-                pixels[colorIndex++] = (byte) intensity;
-                pixels[colorIndex++] = (byte) intensity;
+                pixels[colorIndex++] = (byte)intensity;
+                pixels[colorIndex++] = (byte)intensity;
+                pixels[colorIndex++] = (byte)intensity;
 
                 colorIndex++;
             }

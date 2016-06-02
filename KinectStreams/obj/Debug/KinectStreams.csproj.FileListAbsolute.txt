@@ -46,3 +46,5 @@ C:\Users\Admin\Source\Repos\KinectStreams\KinectStreams\obj\Debug\KinectStreams_
 C:\Users\Admin\Source\Repos\KinectStreams\KinectStreams\obj\Debug\KinectStreams.g.resources
 C:\Users\Admin\Source\Repos\KinectStreams\KinectStreams\obj\Debug\KinectStreams.Properties.Resources.resources
 C:\Users\Admin\Source\Repos\KinectStreams\KinectStreams\obj\Debug\KinectStreams.csproj.GenerateResource.Cache
+C:\Users\Admin\Source\Repos\KinectStreams\KinectStreams\bin\Debug\Microsoft.Kinect.Face.dll
+C:\Users\Admin\Source\Repos\KinectStreams\KinectStreams\bin\Debug\Microsoft.Kinect.Face.xml

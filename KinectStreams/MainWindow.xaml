@@ -5,6 +5,7 @@
     <Grid>
         <Image Name="camera" />
         <Canvas Name="canvas" />
+        <Ellipse Name="ellipseMouth" Style="{StaticResource MouthStyle}" />
         <Grid Style="{StaticResource GridButtonsStyle}">
             <StackPanel Style="{StaticResource StackPanelButtonsStyle}">
                 <Button Content="Color" Style="{StaticResource ButtonStyle}" Click="Color_Click" />
