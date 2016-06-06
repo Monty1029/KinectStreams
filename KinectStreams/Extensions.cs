@@ -98,9 +98,9 @@ namespace KinectStreams
 
             for (int i = 0; i < pixelData.Length; i++)
             {
-                pixels[colorIndex++] *= 255;
-                pixels[colorIndex++] *= 0;
-                pixels[colorIndex++] *= 0;
+                colorIndex++;
+                pixels[colorIndex++] = 0;
+                pixels[colorIndex++] = 0;
 
                 colorIndex++;
             }
@@ -134,9 +134,9 @@ namespace KinectStreams
 
             for (int i = 0; i < pixelData.Length; i++)
             {
-                pixels[colorIndex++] *= 0;
-                pixels[colorIndex++] *= 255;
-                pixels[colorIndex++] *= 0;
+                pixels[colorIndex++] = 0;
+                colorIndex++;
+                pixels[colorIndex++] = 0;
 
                 colorIndex++;
             }
@@ -170,11 +170,9 @@ namespace KinectStreams
 
             for (int i = 0; i < pixelData.Length; i++)
             {
-                pixels[colorIndex++] *= 0;
-                pixels[colorIndex++] *= 0;
-                pixels[colorIndex++] *= 255;
-
-                colorIndex++;
+                pixels[colorIndex++] = 0;
+                pixels[colorIndex++] = 0;
+                colorIndex+=2;
             }
 
             int stride = width * format.BitsPerPixel / 8;
