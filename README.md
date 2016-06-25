@@ -1,8 +1,7 @@
 # KinectStreams
 Testing Kinect V2
 
-Testing different features of the Kinect V2, including depth and infrared detection.
+Testing different features of the Kinect V2, including depth and infrared detection. Some image manipulation features have been implemented.
 
 Upcoming plans:
-- add image manipulation features and filters
 - save snapshots to OneDrive
